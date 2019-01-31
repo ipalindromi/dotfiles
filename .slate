@@ -1,0 +1,61 @@
+
+config defaultToCurrentScreen true
+config nudgePercentOf screenSize
+config resizePercentOf screenSize
+config secondsBetweenRepeat 0.1
+config checkDefaultsOnLoad true
+config focusCheckWidthMax 3000
+config windowHintsShowIcons true
+config windowHintsIgnoreHiddenWindows false
+#config windowHintsDuration 5
+config windowHintsSpread true
+#config windowHintsOrder persist # This appears to break something.
+
+# Monitor Aliases
+alias mon-laptop		0
+alias mon-work			1
+alias mon-home			2
+alias mon-ipad      3
+
+# Abstract positions
+alias full          move screenOriginX;screenOriginY                  screenSizeX;screenSizeY
+alias lefthalf      move screenOriginX;screenOriginY                  screenSizeX/2;screenSizeY
+alias righthalf     move screenOriginX+screenSizeX/2;screenOriginY    screenSizeX/2;screenSizeY
+alias rightmost     move screenOriginX+screenSizeX*0.4;screenOriginY  screenSizeX*0.6;screenSizeY
+alias rightless     move screenOriginX+screenSizeX*0.6;screenOriginY  screenSizeX*0.4;screenSizeY
+alias leftmost      move screenOriginX;screenOriginY                  screenSizeX*0.6;screenSizeY
+alias leftless      move screenOriginX;screenOriginY                  screenSizeX*0.4;screenSizeY
+
+# Default Layouts
+default work			resolutions:${mon-laptop};${mon-work};
+default home			resolutions:${mon-laptop};${mon-home};
+default 1monitor  resolutions:${mon-laptop}
+
+# HYPER key
+alias hyper ctrl;shift;alt;cmd
+alias meh		ctrl;shift;alt
+
+# Motion bindings
+bind l:${meh} ${righthalf}
+bind h:${meh} ${lefthalf}
+bind k:${meh} ${full}
+bind l:${hyper} throw right
+bind h:${hyper} throw left
+
+bind a:${hyper} focus left
+bind ;:${hyper} focus right
+
+# Monitor motion bindings
+bind y:${hyper} throw 0 resize
+bind u:${hyper} throw 1 resize
+bind i:${hyper} throw 2 resize
+
+# Applications
+bind k:${hyper} focus 'Skedpal2'
+bind t:${hyper} focus 'iTerm2'
+bind c:${hyper} focus 'Google Chrome'
+
+bind r:${hyper} relaunch
+
+# Window Hints
+bind esc:cmd hint
