@@ -54,6 +54,7 @@ bind i:${hyper} throw 2 resize
 bind k:${hyper} focus 'Skedpal2'
 bind t:${hyper} focus 'iTerm2'
 bind c:${hyper} focus 'Google Chrome'
+bind d:${hyper} focus 'Code'
 
 bind r:${hyper} relaunch
 
