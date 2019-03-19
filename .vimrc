@@ -5,7 +5,8 @@ call plug#begin('~/.vim/plugged')
 
 " Appearance
 " ====================================================================
-Plug 'nanotech/jellybeans.vim'
+colorscheme seti
+
 " {{{
   let g:jellybeans_use_term_background_color = 0
 
@@ -57,6 +58,7 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 " Initialize plugin system
 call plug#end()
 
@@ -105,3 +107,84 @@ let mapleader = ","
   endfunction
   command! -nargs=+ -complete=dir AgIn call SearchWithAgInDirectory(<f-args>)
 " }}}
+
+" SETTINGS
+" ==========================================
+" {{{
+set ruler
+set number
+
+set nowrap
+
+set laststatus=2
+
+" Turn off bell
+set vb t_vb=
+
+set tabstop=2
+set softtabstop=2
+set noexpandtab
+set smartindent
+set shiftwidth=4
+
+set foldenable
+
+set foldlevelstart=10
+set foldnestmax=10
+set foldmethod=indent
+
+set modelines=1
+
+set wrap
+set linebreak
+set nolist
+
+set nobackup
+
+" Make commands easer
+nnoremap ; :
+
+" Make mode switching easier
+inoremap kk <ESC>
+
+" Open a new horizontal or vertical split
+ nnoremap <leader>- :sp<CR>
+ nnoremap <leader>\ :vsp<CR>
+ 
+ nnoremap <leader>w :w<CR>
+ 
+ " Remap window movement
+ nnoremap <C-h> <C-w>h
+ nnoremap <C-j> <C-w>j
+ nnoremap <C-k> <C-w>k
+ nnoremap <C-l> <C-w>l
+ 
+ nnoremap <Leader><C-r> :so ~/.vimrc<CR>
+ 
+ " Search sanity
+ " nnoremap / /\v
+ " vnoremap / /\v
+ set ignorecase
+ set smartcase
+ set gdefault
+ set incsearch
+ set showmatch
+ set hlsearch
+ 
+ nnoremap <tab> %
+ vnoremap <tab> %
+ 
+ " Move vertically by visual line (fix line wrapping)
+ noremap <expr> j v:count ? 'j' : 'gj'
+ noremap <expr> k v:count ? 'k' : 'gk'
+ 
+ " Super-H and Super-L (beginning / end of line)
+ noremap H ^
+ noremap L $
+ 
+ " Disable arrow keys
+ noremap <Left> <nop>
+ noremap <Right> <nop>
+ noremap <Up> <nop>
+ noremap <Down> <nop>
+ " }}}
