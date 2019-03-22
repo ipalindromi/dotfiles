@@ -1,0 +1,12 @@
+SPACESHIP_PROMPT_ORDER=(user host dir git node exec_time line_sep jobs exit_code char)
+
+source ~/.iterm2_shell_integration.zsh
+
+# Set Spaceship ZSH as a prompt
+autoload -U promptinit; promptinit
+prompt spaceship
+
+alias config='/usr/bin/git --git-dir=/Users/dbaldwin/.cfg/ --work-tree=/Users/dbaldwin'
+alias dropbox="$HOME/Dropbox"
+alias vim='mvim -v'
+alias zsh='vim ~/.zshrc && source ~/.zshrc'
