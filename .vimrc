@@ -145,7 +145,7 @@ set nobackup
 nnoremap ; :
 
 " Make mode switching easier
-inoremap kk <ESC>
+inoremap kj <ESC>
 
 " Open a new horizontal or vertical split
  nnoremap <leader>- :sp<CR>
