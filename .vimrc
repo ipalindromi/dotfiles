@@ -6,27 +6,7 @@ call plug#begin('~/.vim/plugged')
 " Appearance
 " ====================================================================
 colorscheme seti
-
-" {{{
-  let g:jellybeans_use_term_background_color = 0
-
-   " {{{ Modified jellybeans theme
-  let s:base03    = [ '#151513', 233 ]
-  let s:base02    = [ '#30302c', 236 ]
-  let s:base01    = [ '#4e4e43', 237 ]
-  let s:base00    = [ '#666656', 242 ]
-  let s:base0     = [ '#808070', 244 ]
-  let s:base1     = [ '#949484', 246 ]
-  let s:base2     = [ '#a8a897', 248 ]
-  let s:base3     = [ '#e8e8d3', 253 ]
-  let s:yellow    = [ '#ffb964', 215 ]
-  let s:red       = [ '#cf6a4c', 167 ]
-  let s:magenta   = [ '#f0a0c0', 217 ]
-  let s:blue      = [ '#7697D6', 4   ]
-  let s:orange    = [ '#ffb964', 215 ]
-  let s:green     = [ '#99ad6a', 107 ]
-  let s:white     = [ '#FCFCFC', 15  ]
-" }}}
+set background=dark
 
 Plug 'nathanaelkane/vim-indent-guides'
 " {{{
@@ -34,13 +14,16 @@ Plug 'nathanaelkane/vim-indent-guides'
   let g:indent_guides_enable_on_vim_startup = 1
   let g:indent_guides_start_level = 2
   let g:indent_guides_exclude_filetypes = ['help', 'startify', 'man', 'rogue']
+	let g:indent_guides_auto_colors = 0
+	autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=darkgray   ctermbg=233
+	autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=darkgray ctermbg=235
 " }}}
 
 " Sensible defaults
 Plug 'https://github.com/tpope/vim-sensible'
 
-" Preferred theme
-" Plug 'reewr/vim-monokai-phoenix'
+" post install (yarn install | npm install)
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 " Code surround tooling
 Plug 'https://github.com/tpope/vim-surround'
@@ -106,6 +89,10 @@ let mapleader = ","
     call fzf#vim#ag(join(a:000[1:], ' '), extend({'dir': a:1}, g:fzf#vim#default_layout))
   endfunction
   command! -nargs=+ -complete=dir AgIn call SearchWithAgInDirectory(<f-args>)
+" }}}
+
+" {{{
+nmap <Leader>, <plug>(Prettier)
 " }}}
 
 " SETTINGS
