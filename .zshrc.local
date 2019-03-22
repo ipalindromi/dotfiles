@@ -6,7 +6,23 @@ source ~/.iterm2_shell_integration.zsh
 autoload -U promptinit; promptinit
 prompt spaceship
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+bindkey -v
+
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
+
+
+# GIT
+# --------------------------------------------------
+alias gst='git status'
 alias config='/usr/bin/git --git-dir=/Users/dbaldwin/.cfg/ --work-tree=/Users/dbaldwin'
 alias dropbox="$HOME/Dropbox"
 alias vim='mvim -v'
 alias zsh='vim ~/.zshrc && source ~/.zshrc'
+
