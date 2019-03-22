@@ -1,10 +1,10 @@
+### Despite the name, this could probably be better thought of as "personal" than local
+
+if [[ -f $HOME/.zshlocalrc ]] source $HOME/.zshlocalrc
+
 SPACESHIP_PROMPT_ORDER=(user host dir git node exec_time line_sep jobs exit_code char)
 
 source ~/.iterm2_shell_integration.zsh
-
-# Set Spaceship ZSH as a prompt
-autoload -U promptinit; promptinit
-prompt spaceship
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
