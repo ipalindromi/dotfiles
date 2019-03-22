@@ -1,0 +1,2 @@
+alias config='/usr/bin/git --git-dir=/Users/dbaldwin/.cfg/ --work-tree=/Users/dbaldwin'
+alias dropbox="$HOME/Dropbox"
