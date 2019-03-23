@@ -99,9 +99,12 @@ bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
 bindkey '^r' history-incremental-search-backward
 
+# UTILITY
+# --------------------------------------------------
+#alias ls=la
+
 # DISPLAY
 # --------------------------------------------------
-alias ls="ls --color=always"
 
 # GIT
 # --------------------------------------------------

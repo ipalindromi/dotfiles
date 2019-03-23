@@ -215,7 +215,7 @@
 						"manipulators": [
 							{
 								"from": {
-									"key_code": "z"
+									"key_code": "q"
 								},
 								"to": [
 									{
@@ -235,7 +235,7 @@
 								],
 								"to_if_alone": [
 									{
-										"key_code": "z"
+										"key_code": "q"
 									}
 								],
 								"type": "basic"
