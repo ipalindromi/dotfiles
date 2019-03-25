@@ -145,17 +145,8 @@ nnoremap ; :
 " Make mode switching easier
 inoremap kj <ESC>
 
-" Open a new horizontal or vertical split
- nnoremap <leader>- :sp<CR>
- nnoremap <leader>\ :vsp<CR>
  
  nnoremap <leader>w :w<CR>
- 
- " Remap window movement
- nnoremap <C-h> <C-w>h
- nnoremap <C-j> <C-w>j
- nnoremap <C-k> <C-w>k
- nnoremap <C-l> <C-w>l
  
  nnoremap <Leader><C-r> :so ~/.vimrc<CR>
  
@@ -197,13 +188,24 @@ set formatoptions-=cro
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" TAKEN IN PART FROM: https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim
-" Sets how many lines of history VIM has to remember
-set history=500
+" TAKEN IN PART FROM: 
+" https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim
+" https://github.com/zenbro/dotfiles/blob/master/.nvimrc
+
+set number         " show line numbers
+set relativenumber " use relative lines numbering by default
+set noswapfile     " disable creating of *.swp files
+set hidden         " hide buffers instead of closing
+set lazyredraw     " speed up on large files
+set mouse=         " disable mouse
+
+set scrolloff=999       " always keep cursor at the middle of screen
+set virtualedit=onemore " allow the cursor to move just past the end of the line
+set undolevels=5000     " set maximum undo levels
 
 " Enable filetype plugins
 filetype plugin on
-" filetype indent on
+filetype indent on
 "
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -294,3 +296,44 @@ nmap * *zz
 nmap # #zz
 nmap g* g*zz
 nmap g# g#zz
+
+" SPLITS  {{{
+" Remap window movement
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+ 
+" Creating splits with empty buffers in all directions
+nnoremap <Leader>hn :leftabove  vnew<CR>
+nnoremap <Leader>ln :rightbelow vnew<CR>
+nnoremap <Leader>kn :leftabove  new<CR>
+nnoremap <Leader>jn :rightbelow new<CR>
+
+" If split in given direction exists - jump, else create new split
+function! JumpOrOpenNewSplit(key, cmd, fzf) " {{{
+  let current_window = winnr()
+  execute 'wincmd' a:key
+  if current_window == winnr()
+    execute a:cmd
+    if a:fzf
+      Files
+    endif
+  else
+    if a:fzf
+      Files
+    endif
+  endif
+endfunction " }}}
+
+nnoremap <silent> <Leader>hh :call JumpOrOpenNewSplit('h', ':leftabove vsplit', 0)<CR>
+nnoremap <silent> <Leader>ll :call JumpOrOpenNewSplit('l', ':rightbelow vsplit', 0)<CR>
+nnoremap <silent> <Leader>kk :call JumpOrOpenNewSplit('k', ':leftabove split', 0)<CR>
+nnoremap <silent> <Leader>jj :call JumpOrOpenNewSplit('j', ':rightbelow split', 0)<CR>
+
+" Same as above, except it opens unite at the end
+nnoremap <silent> <Leader>h<Space> :call JumpOrOpenNewSplit('h', ':leftabove vsplit', 1)<CR>
+nnoremap <silent> <Leader>l<Space> :call JumpOrOpenNewSplit('l', ':rightbelow vsplit', 1)<CR>
+nnoremap <silent> <Leader>k<Space> :call JumpOrOpenNewSplit('k', ':leftabove split', 1)<CR>
+nnoremap <silent> <Leader>j<Space> :call JumpOrOpenNewSplit('j', ':rightbelow split', 1)<CR>
+" }}}
