@@ -114,5 +114,5 @@ alias gst='git status'
 alias config='/usr/bin/git --git-dir=/Users/dbaldwin/.cfg/ --work-tree=/Users/dbaldwin'
 alias dropbox="$HOME/Dropbox"
 alias vim='mvim -v'
-alias zsh='vim ~/.zshrc && source ~/.zshrc'
+alias zshrc='vim ~/.zshrc && source ~/.zshrc'
 

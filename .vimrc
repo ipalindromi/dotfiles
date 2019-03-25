@@ -1,15 +1,9 @@
-" Specify a directory for plugins
-" - For Neovim: ~/.local/share/nvim/plugged
-" - Avoid using standard Vim directory names like 'plugin'
+" vim:fdm=marker
+
+" {{{ PLUGINS
 call plug#begin('~/.vim/plugged')
 
-" Appearance
-" ====================================================================
-colorscheme seti
-set background=dark
-
 Plug 'nathanaelkane/vim-indent-guides'
-" {{{
   let g:indent_guides_default_mapping = 0
   let g:indent_guides_enable_on_vim_startup = 1
   let g:indent_guides_start_level = 2
@@ -36,18 +30,36 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': './insall.py --tern-completer' }
+
+Plug 'scrooloose/nerdcommenter'
+
+Plug 'https://github.com/pangloss/vim-javascript'
+let g:javascript_plugin_jsdoc = 1
+augroup javascript_folding
+    au!
+    au FileType javascript setlocal foldmethod=syntax
+augroup END
+
+" }}}
 " Initialize plugin system
 call plug#end()
 
+" Appearance
+" ====================================================================
+colorscheme seti
+set background=dark
+
+
 let mapleader = ","
 
-" {{{
+" {{{ FZF SEARCHING
   let g:fzf_vim_statusline = 0 " disable statusline overwriting
 
   nnoremap <silent> <leader><space> :Files<CR>
@@ -91,13 +103,13 @@ let mapleader = ","
   command! -nargs=+ -complete=dir AgIn call SearchWithAgInDirectory(<f-args>)
 " }}}
 
-" {{{
 nmap <Leader>, <plug>(Prettier)
-" }}}
+let g:prettier#config#use_tabs = 'true'
 
-" SETTINGS
+map <Leader>t :NERDTreeToggle<CR>
+
+" {{{ SETTINGS
 " ==========================================
-" {{{
 set ruler
 set number
 
@@ -111,14 +123,13 @@ set vb t_vb=
 set tabstop=2
 set softtabstop=2
 set noexpandtab
-set smartindent
-set shiftwidth=4
+set shiftwidth=2
 
 set foldenable
 
 set foldlevelstart=10
 set foldnestmax=10
-set foldmethod=indent
+set foldmethod=syntax
 
 set modelines=1
 
@@ -175,3 +186,111 @@ inoremap kj <ESC>
  noremap <Up> <nop>
  noremap <Down> <nop>
  " }}}
+ 
+set backupdir=/tmp//
+set directory=/tmp//
+set undodir=/tmp//
+
+" Turns off auto comments
+set formatoptions-=cro
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" TAKEN IN PART FROM: https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim
+" Sets how many lines of history VIM has to remember
+set history=500
+
+" Enable filetype plugins
+filetype plugin on
+" filetype indent on
+"
+" Set to auto read when a file is changed from the outside
+set autoread
+
+" Fast saving
+nmap <leader>w :w!<cr>
+
+" :W sudo saves the file
+" (useful for handling the permission-denied error)
+command W w !sudo tee % > /dev/null
+
+"
+" Turn on the Wild menu
+set wildmenu
+
+" Ignore compiled files
+set wildignore=*.o,*~,*.pyc
+if has("win16") || has("win32")
+    set wildignore+=.git\*,.hg\*,.svn\*
+else
+    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+endif
+
+"Always show current position
+set ruler
+
+" Height of the command bar
+set cmdheight=2
+
+" A buffer becomes hidden when it is abandoned
+set hid
+
+" Ignore case when searching
+set ignorecase
+
+" When searching try to be smart about cases
+set smartcase
+
+" Highlight search results
+set hlsearch
+
+" Makes search act like search in modern browsers
+set incsearch
+
+" Don't redraw while executing macros (good performance config)
+set lazyredraw
+
+" For regular expressions turn magic on
+set magic
+
+" Show matching brackets when text indicator is over them
+set showmatch
+" How many tenths of a second to blink when matching brackets
+set mat=2
+
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+" Add a bit extra margin to the left
+set foldcolumn=1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Turn persistent undo on
+"    means that you can undo even when you close a buffer/VIM
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+try
+    set undofile
+catch
+endtry
+
+set ssop-=options    " do not store global and local values in a session
+
+autocmd FileType vim let b:vcm_tab_complete = 'vim'
+
+" Show hidden characters
+set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<,nbsp:⎵
+
+" Toggle viewing whitespace
+nnoremap <Leader><C-w> :set list!<CR>
+
+" Keep search results at the center of screen
+nmap n nzz
+nmap N Nzz
+nmap * *zz
+nmap # #zz
+nmap g* g*zz
+nmap g# g#zz
