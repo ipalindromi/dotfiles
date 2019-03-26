@@ -1,22 +1,5 @@
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-if [[ -f $HOME/.zshrc.personal ]]; then
-		source $HOME/.zshrc.personal
-fi
-if [[ -f $HOME/.zshrc.local ]]; then
-		source $HOME/.zshrc.local
-fi
-
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source $HOME/.config/.localpreztorc
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
-
-# Set Spaceship ZSH as a prompt
-autoload -U promptinit; promptinit
-prompt spaceship
+source /Users/dbaldwin/.purepower
+source /Users/dbaldwin/powerlevel10k/powerlevel10k.zsh-theme
+alias config='/usr/bin/git --git-dir=/Users/dbaldwin/.cfg/ --work-tree=/Users/dbaldwin'
+source $HOME/.zshrc.personal
+source /Users/dbaldwin/.zprezto/init.zsh
