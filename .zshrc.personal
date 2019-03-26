@@ -7,15 +7,6 @@ source ~/.iterm2_shell_integration.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-bindkey -v
-
-bindkey '^P' up-history
-bindkey '^N' down-history
-bindkey '^?' backward-delete-char
-bindkey '^h' backward-delete-char
-bindkey '^w' backward-kill-word
-bindkey '^r' history-incremental-search-backward
-
 # UTILITY
 # --------------------------------------------------
 #alias ls=la
@@ -50,8 +41,17 @@ zstyle ':prezto:load' pmodule \
     'ruby' \
     'completion' \
 		'autosuggestions' \
-		'history-substring-search' \
     'syntax-highlighting' \
+		'history-substring-search' \
     'ssh' \
 		'prompt'
 # }}}
+
+bindkey -v
+
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
