@@ -1,4 +1,5 @@
 " vim:fdm=marker
+let mapleader = ","
 
 " {{{ PLUGINS
 call plug#begin('~/.vim/plugged')
@@ -31,6 +32,7 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
+map <Leader>t :NERDTreeToggle<CR>
 
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -41,17 +43,16 @@ Plug 'Valloric/YouCompleteMe', { 'do': './insall.py --tern-completer' }
 Plug 'scrooloose/nerdcommenter'
 
 Plug 'https://github.com/pangloss/vim-javascript'
-
-Plug 'janko/vim-test'
-
-Plug 'justinmk/vim-sneak'
-let g:sneak#s_next = 1
-
 let g:javascript_plugin_jsdoc = 1
 augroup javascript_folding
     au!
     au FileType javascript setlocal foldmethod=syntax
 augroup END
+
+Plug 'janko/vim-test'
+
+Plug 'justinmk/vim-sneak'
+let g:sneak#s_next = 1
 
 " }}}
 " Initialize plugin system
@@ -63,26 +64,30 @@ colorscheme monokai
 set background=dark
 
 
-let mapleader = ","
-
 " {{{ FZF SEARCHING
   let g:fzf_vim_statusline = 0 " disable statusline overwriting
 
+	" Search git tracked files
+	nmap <Leader>fg :GFiles<CR>
+
+	" Search global files
   nnoremap <silent> <leader><space> :Files<CR>
-  nnoremap <silent> <leader>a :Buffers<CR>
+  nnoremap <silent> <leader>fb :Buffers<CR>
   nnoremap <silent> <leader>A :Windows<CR>
   nnoremap <silent> <leader>; :BLines<CR>
   nnoremap <silent> <leader>o :BTags<CR>
   nnoremap <silent> <leader>O :Tags<CR>
-  nnoremap <silent> <leader>? :History<CR>
+  nnoremap <silent> <leader>fh :History<CR>
   nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
   nnoremap <silent> <leader>. :AgIn
-
-  nnoremap <silent> K :call SearchWordWithAg()<CR>
-  vnoremap <silent> K :call SearchVisualSelectionWithAg()<CR>
   nnoremap <silent> <leader>gl :Commits<CR>
   nnoremap <silent> <leader>ga :BCommits<CR>
   nnoremap <silent> <leader>ft :Filetypes<CR>
+
+	" Search with AG
+	nnoremap <silent> <leader>f :Ag<Space>
+  nnoremap <silent> K :call SearchWordWithAg()<CR>
+  vnoremap <silent> K :call SearchVisualSelectionWithAg()<CR>
 
   imap <C-x><C-f> <plug>(fzf-complete-file-ag)
   imap <C-x><C-l> <plug>(fzf-complete-line)
@@ -112,7 +117,6 @@ let mapleader = ","
 nmap <Leader>, <plug>(Prettier)
 let g:prettier#config#use_tabs = 'true'
 
-map <Leader>t :NERDTreeToggle<CR>
 
 " {{{ SETTINGS
 " ==========================================
@@ -351,4 +355,7 @@ nmap <silent> t<C-g> :TestVisit<CR>
 " Turns off auto comments
 set formatoptions-=cro
 
-nnoremap <Leader>ws :mksession! dev.vim<CR>
+nnoremap <Leader><C-s> :mksession! dev.vim<CR>
+
+" Enter clears search
+nnoremap <CR> :noh<CR><CR>

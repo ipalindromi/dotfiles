@@ -9,16 +9,21 @@ source ~/.iterm2_shell_integration.zsh
 
 # UTILITY
 # --------------------------------------------------
-#alias ls=la
+# alias ls=la
 
-# GIT
+# GIT {{{
 # --------------------------------------------------
+alias gau='git add -u'
+alias gb='git branch'
+alias gc='git commit'
+alias gco='git checkout'
 alias gst='git status'
 
 
 alias dropbox="$HOME/Dropbox"
+alias so='source ~/.zshrc'
 alias vim='mvim -v'
-alias zshrc='vim ~/.zshrc && source ~/.zshrc'
+alias zshrc='vim ~/.zshrc.person && source ~/.zshrc'
 
 # PREZTO SETUP {{{
 zstyle ':prezto:*:*' color 'yes'
