@@ -41,6 +41,12 @@ Plug 'Valloric/YouCompleteMe', { 'do': './insall.py --tern-completer' }
 Plug 'scrooloose/nerdcommenter'
 
 Plug 'https://github.com/pangloss/vim-javascript'
+
+Plug 'janko/vim-test'
+
+Plug 'justinmk/vim-sneak'
+let g:sneak#s_next = 1
+
 let g:javascript_plugin_jsdoc = 1
 augroup javascript_folding
     au!
@@ -53,7 +59,7 @@ call plug#end()
 
 " Appearance
 " ====================================================================
-colorscheme seti
+colorscheme monokai
 set background=dark
 
 
@@ -181,9 +187,6 @@ inoremap kj <ESC>
 set backupdir=/tmp//
 set directory=/tmp//
 set undodir=/tmp//
-
-" Turns off auto comments
-set formatoptions-=cro
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -337,3 +340,15 @@ nnoremap <silent> <Leader>l<Space> :call JumpOrOpenNewSplit('l', ':rightbelow vs
 nnoremap <silent> <Leader>k<Space> :call JumpOrOpenNewSplit('k', ':leftabove split', 1)<CR>
 nnoremap <silent> <Leader>j<Space> :call JumpOrOpenNewSplit('j', ':rightbelow split', 1)<CR>
 " }}}
+
+" these "Ctrl mappings" work well when Caps Lock is mapped to Ctrl
+nmap <silent> t<C-n> :TestNearest<CR>
+nmap <silent> t<C-f> :TestFile<CR>
+nmap <silent> t<C-s> :TestSuite<CR>
+nmap <silent> t<C-l> :TestLast<CR>
+nmap <silent> t<C-g> :TestVisit<CR>
+
+" Turns off auto comments
+set formatoptions-=cro
+
+nnoremap <Leader>ws :mksession! dev.vim<CR>
