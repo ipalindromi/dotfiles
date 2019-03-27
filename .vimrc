@@ -38,7 +38,15 @@ map <Leader>t :NERDTreeToggle<CR>
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-Plug 'Valloric/YouCompleteMe', { 'do': './insall.py --tern-completer' }
+"Plug 'Valloric/YouCompleteMe', { 'do': './insall.py --tern-completer' }
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 
 Plug 'scrooloose/nerdcommenter'
 
@@ -53,6 +61,15 @@ Plug 'janko/vim-test'
 
 Plug 'justinmk/vim-sneak'
 let g:sneak#s_next = 1
+
+Plug 'xolox/vim-session'
+Plug 'xolox/vim-misc'
+" Don't save hidden and unloaded buffers in sessions.
+set sessionoptions-=buffers
+" Don't persist options and mappings because it can corrupt sessions.
+set sessionoptions-=options
+let g:session_autosave='yes'
+let g:session_autosave_periodic=1
 
 " }}}
 " Initialize plugin system
@@ -170,9 +187,6 @@ inoremap kj <ESC>
  set showmatch
  set hlsearch
  
- nnoremap <tab> %
- vnoremap <tab> %
- 
  " Move vertically by visual line (fix line wrapping)
  noremap <expr> j v:count ? 'j' : 'gj'
  noremap <expr> k v:count ? 'k' : 'gk'
@@ -286,8 +300,6 @@ try
 catch
 endtry
 
-set ssop-=options    " do not store global and local values in a session
-
 autocmd FileType vim let b:vcm_tab_complete = 'vim'
 
 " Show hidden characters
@@ -355,7 +367,33 @@ nmap <silent> t<C-g> :TestVisit<CR>
 " Turns off auto comments
 set formatoptions-=cro
 
-nnoremap <Leader><C-s> :mksession! dev.vim<CR>
 
 " Enter clears search
-nnoremap <CR> :noh<CR><CR>
+" nnoremap <CR> :noh<CR><CR>
+
+" https://gregjs.com/vim/2016/configuring-the-deoplete-asynchronous-keyword-completion-plugin-with-tern-for-vim/
+" omnifuncs;;
+augroup omnifuncs
+  autocmd!
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+augroup end
+" tern
+if exists('g:plugs["tern_for_vim"]')
+  let g:tern_show_argument_hints = 'on_hold'
+  let g:tern_show_signature_in_pum = 1
+  autocmd FileType javascript setlocal omnifunc=tern#Complete
+endif
+" deoplete tab-complete
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" tern
+autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
+let g:deoplete#enable_at_startup = 1
+
+if !exists('g:deoplete#omni#input_patterns')
+  let g:deoplete#omni#input_patterns = {}
+endif
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
