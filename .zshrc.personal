@@ -1,4 +1,8 @@
 ### Despite the name, this could probably be better thought of as "personal" than local
+#
+export EDITOR=/usr/local/bin/mvim
+export VISUAL=/usr/local/bin/mvim
+
 export LSCOLORS='exfxcxdxbxGxDxabagacad'
 
 if [[ -f $HOME/.zshlocalrc ]] source $HOME/.zshlocalrc
@@ -16,6 +20,7 @@ source ~/.iterm2_shell_integration.zsh
 alias gau='git add -u'
 alias gb='git branch'
 alias gc='git commit'
+alias gl='git pull'
 alias gco='git checkout'
 alias gst='git status'
 
@@ -24,6 +29,7 @@ alias dropbox="$HOME/Dropbox"
 alias so='source ~/.zshrc'
 alias vim='mvim -v'
 alias zshrc='vim ~/.zshrc.person && source ~/.zshrc'
+alias python='python3'
 
 # PREZTO SETUP {{{
 zstyle ':prezto:*:*' color 'yes'
@@ -37,7 +43,6 @@ zstyle ':prezto:load' pmodule \
     'helper' \
     'editor' \
     'history' \
-    'git' \
     'prompt' \
     'utility' \
     'gpg' \
