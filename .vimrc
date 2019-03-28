@@ -57,6 +57,12 @@ augroup javascript_folding
     au FileType javascript setlocal foldmethod=syntax
 augroup END
 
+Plug 'mxw/vim-jsx'
+Plug 'w0rp/ale'
+
+" Easily run async shell commands in background
+Plug 'skywind3000/asyncrun.vim'
+
 Plug 'janko/vim-test'
 
 Plug 'justinmk/vim-sneak'
