@@ -77,6 +77,8 @@ set sessionoptions-=options
 let g:session_autosave='yes'
 let g:session_autosave_periodic=1
 
+Plug 'tpope/vim-fugitive'
+
 " }}}
 " Initialize plugin system
 call plug#end()
