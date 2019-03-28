@@ -1,5 +1,6 @@
-" vim:fdm=marker
 let mapleader = ","
+
+set pyxversion=3
 
 " {{{ PLUGINS
 call plug#begin('~/.vim/plugged')
@@ -175,40 +176,41 @@ set nolist
 set nobackup
 
 " Make commands easer
-nnoremap ; :
+"nnoremap ; :
+nnoremap kj :
 
 " Make mode switching easier
-inoremap kj <ESC>
+"inoremap kj <ESC>
+inoremap jk <ESC>
+ 
+nnoremap <leader>w :w<CR>
+ 
+nnoremap <Leader><C-r> :so ~/.vimrc<CR>
+ 
+" Search sanity
+" nnoremap / /\v
+" vnoremap / /\v
+set ignorecase
+set smartcase
+set gdefault
+set incsearch
+set showmatch
+set hlsearch
 
- 
- nnoremap <leader>w :w<CR>
- 
- nnoremap <Leader><C-r> :so ~/.vimrc<CR>
- 
- " Search sanity
- " nnoremap / /\v
- " vnoremap / /\v
- set ignorecase
- set smartcase
- set gdefault
- set incsearch
- set showmatch
- set hlsearch
- 
- " Move vertically by visual line (fix line wrapping)
- noremap <expr> j v:count ? 'j' : 'gj'
- noremap <expr> k v:count ? 'k' : 'gk'
- 
- " Super-H and Super-L (beginning / end of line)
- noremap H ^
- noremap L $
- 
- " Disable arrow keys
- noremap <Left> <nop>
- noremap <Right> <nop>
- noremap <Up> <nop>
- noremap <Down> <nop>
- " }}}
+" Move vertically by visual line (fix line wrapping)
+noremap <expr> j v:count ? 'j' : 'gj'
+noremap <expr> k v:count ? 'k' : 'gk'
+
+" Super-H and Super-L (beginning / end of line)
+noremap H ^
+noremap L $
+
+" Disable arrow keys
+noremap <Left> <nop>
+noremap <Right> <nop>
+noremap <Up> <nop>
+noremap <Down> <nop>
+" }}}
  
 set backupdir=/tmp//
 set directory=/tmp//
