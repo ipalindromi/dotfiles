@@ -40,13 +40,13 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 "Plug 'Valloric/YouCompleteMe', { 'do': './insall.py --tern-completer' }
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+"if has('nvim')
+  "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"else
+  "Plug 'Shougo/deoplete.nvim'
+  "Plug 'roxma/nvim-yarp'
+  "Plug 'roxma/vim-hug-neovim-rpc'
+"endif
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 
 Plug 'scrooloose/nerdcommenter'
@@ -59,27 +59,20 @@ augroup javascript_folding
 augroup END
 
 Plug 'mxw/vim-jsx'
-Plug 'w0rp/ale'
+"Plug 'w0rp/ale'
 
 " Easily run async shell commands in background
-Plug 'skywind3000/asyncrun.vim'
+"Plug 'skywind3000/asyncrun.vim'
 
 Plug 'janko/vim-test'
 
 Plug 'justinmk/vim-sneak'
 let g:sneak#s_next = 1
 
-Plug 'xolox/vim-session'
-Plug 'xolox/vim-misc'
-" Don't save hidden and unloaded buffers in sessions.
-set sessionoptions-=buffers
-" Don't persist options and mappings because it can corrupt sessions.
-set sessionoptions-=options
-let g:session_autosave='yes'
-let g:session_autosave_periodic=1
+"Plug 'tpope/vim-fugitive'
 
-Plug 'tpope/vim-fugitive'
-
+Plug 'tpope/vim-obsession'
+nnoremap <leader>ws :Obsess! dev.vim<CR>
 " }}}
 " Initialize plugin system
 call plug#end()
@@ -177,11 +170,11 @@ set nobackup
 
 " Make commands easer
 "nnoremap ; :
-nnoremap kj :
+nnoremap <space>; :
 
 " Make mode switching easier
 "inoremap kj <ESC>
-inoremap jk <ESC>
+inoremap kj <ESC>
  
 nnoremap <leader>w :w<CR>
  
@@ -407,3 +400,6 @@ if !exists('g:deoplete#omni#input_patterns')
   let g:deoplete#omni#input_patterns = {}
 endif
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" Use of tags
+"set tags+=./tags;
