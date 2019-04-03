@@ -1,6 +1,6 @@
 let mapleader = ","
 
-set pyxversion=3
+" set pyxversion=3
 
 " {{{ PLUGINS
 call plug#begin('~/.vim/plugged')
@@ -73,6 +73,8 @@ let g:sneak#s_next = 1
 
 Plug 'tpope/vim-obsession'
 nnoremap <leader>ws :Obsess! dev.vim<CR>
+
+Plug 'machakann/vim-highlightedyank'
 " }}}
 " Initialize plugin system
 call plug#end()
@@ -239,7 +241,7 @@ nmap <leader>w :w!<cr>
 
 " :W sudo saves the file
 " (useful for handling the permission-denied error)
-command W w !sudo tee % > /dev/null
+" command W w !sudo tee % > /dev/null
 
 "
 " Turn on the Wild menu
