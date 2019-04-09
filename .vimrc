@@ -5,16 +5,6 @@ let mapleader = ","
 " {{{ PLUGINS
 call plug#begin('~/.vim/plugged')
 
-Plug 'nathanaelkane/vim-indent-guides'
-  let g:indent_guides_default_mapping = 0
-  let g:indent_guides_enable_on_vim_startup = 1
-  let g:indent_guides_start_level = 2
-  let g:indent_guides_exclude_filetypes = ['help', 'startify', 'man', 'rogue']
-	let g:indent_guides_auto_colors = 0
-	autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=darkgray   ctermbg=233
-	autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=darkgray ctermbg=235
-" }}}
-
 " Sensible defaults
 Plug 'https://github.com/tpope/vim-sensible'
 
@@ -29,6 +19,10 @@ Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
 " Multiple Plug commands can be written in a single line using | separators
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<leader>e"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -380,7 +374,7 @@ set formatoptions-=cro
 
 
 " Enter clears search
-" nnoremap <CR> :noh<CR><CR>
+nnoremap <CR> :noh<CR><CR>
 
 " https://gregjs.com/vim/2016/configuring-the-deoplete-asynchronous-keyword-completion-plugin-with-tern-for-vim/
 " omnifuncs;;
@@ -411,3 +405,4 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " Use of tags
 "set tags+=./tags;
+set spell spelllang=en_us
