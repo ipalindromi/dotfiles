@@ -72,10 +72,13 @@ let g:sneak#s_next = 1
 "Plug 'tpope/vim-fugitive'
 
 Plug 'tpope/vim-obsession'
-nnoremap <leader>ws :Obsess! dev.vim<CR>
+nnoremap <leader>wss :Obsess! dev.vim<CR>
 
 Plug 'machakann/vim-highlightedyank'
-" }}}
+
+Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
+let g:vimwiki_list = [{'path': '~/SynologyDrive/wiki/', 'syntax': 'markdown', 'ext': '.md', 'auto_tags': 1}]
+
 " Initialize plugin system
 call plug#end()
 
@@ -141,6 +144,9 @@ let g:prettier#config#use_tabs = 'true'
 
 " {{{ SETTINGS
 " ==========================================
+set nocompatible
+syntax on
+
 set ruler
 set number
 
