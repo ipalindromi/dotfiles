@@ -172,7 +172,7 @@ set nobackup
 
 " Make commands easer
 "nnoremap ; :
-nnoremap <space>; :
+nnoremap <leader>; :
 
 " Make mode switching easier
 "inoremap kj <ESC>
@@ -217,6 +217,8 @@ set undodir=/tmp//
 " TAKEN IN PART FROM: 
 " https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim
 " https://github.com/zenbro/dotfiles/blob/master/.nvimrc
+
+set clipboard+=unnamedplus
 
 set number         " show line numbers
 set relativenumber " use relative lines numbering by default
