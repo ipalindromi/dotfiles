@@ -33,14 +33,6 @@ map <Leader>t :NERDTreeToggle<CR>
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-"Plug 'Valloric/YouCompleteMe', { 'do': './insall.py --tern-completer' }
-"if has('nvim')
-  "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"else
-  "Plug 'Shougo/deoplete.nvim'
-  "Plug 'roxma/nvim-yarp'
-  "Plug 'roxma/vim-hug-neovim-rpc'
-"endif
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 
 Plug 'scrooloose/nerdcommenter'
@@ -73,6 +65,38 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
 let g:vimwiki_list = [{'path': '~/SynologyDrive/wiki/', 'syntax': 'markdown', 'ext': '.md', 'auto_tags': 1}]
 
+" Python specific stuffs {{{
+	Plug 'vim-syntastic/syntastic'
+	Plug 'nvie/vim-flake8'
+	let python_highlight_all=1
+	syntax on
+" }}}
+
+" UI related
+Plug 'chriskempson/base16-vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" Better Visual Guide
+Plug 'Yggdroot/indentLine'
+
+" syntax check
+Plug 'w0rp/ale'
+
+" Autocomplete
+Plug 'davidhalter/jedi-vim'
+Plug 'ncm2/ncm2'
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-jedi'
+
+if has('nvim')
+	Plug 'roxma/nvim-yarp'
+endif
+
+" Formater
+Plug 'Chiel92/vim-autoformat'
+
 " Initialize plugin system
 call plug#end()
 
@@ -81,6 +105,7 @@ call plug#end()
 colorscheme monokai
 set background=dark
 
+"set clipboard+=unnamedplus
 
 " {{{ FZF SEARCHING
   let g:fzf_vim_statusline = 0 " disable statusline overwriting
@@ -135,7 +160,6 @@ set background=dark
 nmap <Leader>, <plug>(Prettier)
 let g:prettier#config#use_tabs = 'true'
 
-
 " {{{ SETTINGS
 " ==========================================
 set nocompatible
@@ -172,6 +196,7 @@ set nobackup
 
 " Make commands easer
 "nnoremap ; :
+nnoremap <CR> :
 nnoremap <leader>; :
 
 " Make mode switching easier
@@ -218,7 +243,6 @@ set undodir=/tmp//
 " https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim
 " https://github.com/zenbro/dotfiles/blob/master/.nvimrc
 
-set clipboard+=unnamedplus
 
 set number         " show line numbers
 set relativenumber " use relative lines numbering by default
@@ -376,7 +400,7 @@ set formatoptions-=cro
 
 
 " Enter clears search
-nnoremap <CR> :noh<CR><CR>
+nnoremap <leader><ESC> :noh<CR>
 
 " https://gregjs.com/vim/2016/configuring-the-deoplete-asynchronous-keyword-completion-plugin-with-tern-for-vim/
 " omnifuncs;;
@@ -407,4 +431,47 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " Use of tags
 "set tags+=./tags;
-set spell spelllang=en_us
+"set spell spelllang=en_us
+
+" Enable folding with the spacebar
+nnoremap <space> za
+nnoremap <leader>xt :windo bd<CR>
+"au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
+" NCM2
+augroup NCM2
+  autocmd!
+  " enable ncm2 for all buffers
+  autocmd BufEnter * call ncm2#enable_for_buffer()
+  " :help Ncm2PopupOpen for more information
+  set completeopt=noinsert,menuone,noselect
+  " When the <Enter> key is pressed while the popup menu is visible, it only
+  " hides the menu. Use this mapping to close the menu and also start a new line.
+  inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+  " uncomment this block if you use vimtex for LaTex
+  " autocmd Filetype tex call ncm2#register_source({
+  "           \ 'name': 'vimtex',
+  "           \ 'priority': 8,
+  "           \ 'scope': ['tex'],
+  "           \ 'mark': 'tex',
+  "           \ 'word_pattern': '\w+',
+  "           \ 'complete_pattern': g:vimtex#re#ncm2,
+  "           \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+  "           \ })
+augroup END
+" Ale
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_linters = {'python': ['flake8']}
+" Airline
+let g:airline_left_sep  = ''
+let g:airline_right_sep = ''
+let g:airline#extensions#ale#enabled = 1
+let airline#extensions#ale#error_symbol = 'E:'
+let airline#extensions#ale#warning_symbol = 'W:'
+
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
+autocmd FileType python setlocal shiftwidth=2 softtabstop=2 expandtab

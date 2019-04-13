@@ -1,7 +1,7 @@
 ### Despite the name, this could probably be better thought of as "personal" than local
 #
-export EDITOR=/usr/local/bin/mvim
-export VISUAL=/usr/local/bin/mvim
+export EDITOR=/usr/local/bin/nvim
+export VISUAL=/usr/local/bin/nvim
 
 export LSCOLORS='exfxcxdxbxGxDxabagacad'
 
