@@ -29,8 +29,9 @@ alias ctags="`brew --prefix`/bin/ctags"
 alias jtags="ctags -R app config lib && sed -i ‘’ -E ‘/^(if|switch|function|module\.exports|it|describe).+language:js$/d’ tags"
 alias dropbox="$HOME/Dropbox"
 alias so='source ~/.zshrc'
-alias vim='mvim -v'
-alias zshrc='vim ~/.zshrc.person && source ~/.zshrc'
+alias vim='nvim'
+alias zrc='$EDITOR ~/.zshrc.personal && source ~/.zshrc'
+alias vrc='$EDITOR ~/.vimrc.'
 alias python='python3'
 
 # PREZTO SETUP {{{
