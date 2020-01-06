@@ -42,21 +42,29 @@ bind k:${meh} ${full}
 bind l:${hyper} throw right
 bind h:${hyper} throw left
 
-bind a:${hyper} focus left
-bind ;:${hyper} focus right
+#bind a:${hyper} focus left
+#bind ;:${hyper} focus right
 
 # Monitor motion bindings
-bind y:${hyper} throw 0 resize
-bind u:${hyper} throw 1 resize
-bind i:${hyper} throw 2 resize
+#bind y:${hyper} throw 0 resize
+#bind u:${hyper} throw 1 resize
+#bind i:${hyper} throw 2 resize
 
 # Applications
-bind k:${hyper} focus 'Skedpal2'
 bind t:${hyper} focus 'iTerm2'
-bind c:${hyper} focus 'Google Chrome'
+bind c:${hyper} focus 'Brave Browser'
 bind d:${hyper} focus 'Code'
+bind a:${hyper} focus 'Todoist'
+bind s:${hyper} focus 'Slack'
+bind x:${hyper} focus 'ForkLift'
+bind e:${hyper} focus 'DEVONthink 3'
+bind f:${hyper} focus 'Drafts'
+bind y:${hyper} focus 'Day One'
+bind o:${hyper} focus 'Notion'
+bind p:${hyper} focus 'ClickUp'
+bind k:${hyper} focus 'GoodTask'
 
 bind r:${hyper} relaunch
 
 # Window Hints
-bind esc:cmd hint
+# bind esc:cmd hint

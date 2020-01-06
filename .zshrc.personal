@@ -14,9 +14,11 @@ source ~/.iterm2_shell_integration.zsh
 # UTILITY
 # --------------------------------------------------
 # alias ls=la
+alias vault="lftp -u dbaldwin, sftp://vault.ssh:99"
 
 # GIT {{{
 # --------------------------------------------------
+alias ga='git add'
 alias gau='git add -u'
 alias gb='git branch'
 alias gc='git commit'
@@ -36,28 +38,30 @@ alias python='python3'
 
 # PREZTO SETUP {{{
 zstyle ':prezto:*:*' color 'yes'
-zstyle ':prezto:module:editor' key-bindings 'vi'
+#zstyle ':prezto:module:editor' key-bindings 'vi'
 zstyle ':prezto:module:git:alias' skip 'yes'
 zstyle ':prezto:module:terminal' auto-title 'yes'
 zstyle ':prezto:module:python' autovenv 'yes'
 zstyle ':prezto:load' pmodule \
     'environment' \
-		'directory' \
-    'helper' \
+    'terminal' \
     'editor' \
     'history' \
-    'prompt' \
+    'directory' \
+    'spectrum' \
     'utility' \
-    'gpg' \
     'ssh' \
+    'completion' \
+    'helper' \
+    'prompt' \
+    'gpg' \
+    'git' \
     'python' \
     'ruby' \
-    'completion' \
-		'autosuggestions' \
+    'autosuggestions' \
     'syntax-highlighting' \
-		'history-substring-search' \
-    'ssh' \
-		'prompt'
+    'history-substring-search' \
+    'prompt'
 # }}}
 
 bindkey -v
@@ -67,6 +71,6 @@ bindkey '^N' down-history
 bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
-bindkey '^r' history-incremental-search-backward
+#bindkey -M vicmd '^r' history-substring-search-up
 
 export FZF_DEFAULT_COMMAND='ag --nocolor --ignore node_modules -g ""'
